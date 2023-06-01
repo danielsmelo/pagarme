@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+    sdk:
+        build: .
+        sysctls:
+            - net.ipv4.ip_unprivileged_port_start=0
+        container_name: pagarmesdk
+        environment:
+            - DOCKER=1
+            - DEV_MODE=1
+            - BK_SYNC=1
+            - XDEBUG_ENABLED=true
+            - XDEBUG_CONFIG=idekey=VSCODE
+        volumes:
+            - .:/var/www/html
+        env_file:
+            - ./.env
+        ports:
+            - 8888:80
