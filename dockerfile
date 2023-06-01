@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:7.4.2-apache
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libzip-dev
 
-RUN pecl install xdebug \
+RUN pecl install xdebug-3.1.5 \
     && docker-php-ext-enable xdebug
 
 RUN docker-php-ext-install pdo pdo_mysql \

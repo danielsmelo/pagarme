@@ -4,12 +4,22 @@ namespace Danielsmelo\Pagarme;
 
 class Pagarme
 {
+    protected $customer;
+    protected $recipient;
+    protected $charge;
+    protected $order;
+
     public function __construct(
-        protected Endpoints\Customer $customer,
-        protected Endpoints\Recipient $recipient,
-        protected Endpoints\Charge $charge,
-        protected Endpoints\Order $order
-    ) {}
+        Endpoints\Customer $customer,
+        Endpoints\Recipient $recipient,
+        Endpoints\Charge $charge,
+        Endpoints\Order $order
+    ) {
+        $this->customer = $customer;
+        $this->recipient = $recipient;
+        $this->charge = $charge;
+        $this->order = $order;
+    }
 
     public function customer()
     {
