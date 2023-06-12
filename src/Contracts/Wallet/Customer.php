@@ -1,6 +1,6 @@
 <?php
 
-namespace Contracts\Wallet;
+namespace Danielsmelo\Pagarme\Contracts\Wallet;
 
 final class Customer
 {
@@ -33,4 +33,15 @@ final class Customer
         'birthdate' => 'date_format:d/m/Y',
         'metadata.company' => 'array',
     ];
+
+    public function customer(string $name, string $email, string $document)
+    {
+        return [
+            'type' => 'individual',
+            'name' => $name,
+            'email' => $email,
+            'document_type' => 'CPF',
+            'document' => $document
+        ];
+    }
 }

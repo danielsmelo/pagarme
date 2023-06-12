@@ -11,3 +11,4 @@ vendor
 node_modules
 .vscode
 .env
+.phpunit.result.cache
