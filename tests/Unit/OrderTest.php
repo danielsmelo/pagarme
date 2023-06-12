@@ -35,6 +35,17 @@ class OrderTest extends TestCase
             ]
         ];
 
+        $data2 = Pagarme::payload()->order(
+            [
+                Pagarme::payload()->item(1000, 'item teste', '123', 1),
+                Pagarme::payload()->item(1200, 'item teste 2', '456', 1),
+            ],
+            [
+                Pagarme::payload()->checkoutPayment(2200, '2000-01-01')
+            ],
+            'cus_teste4343lk4j3'
+        );
+
         $mockHandler = new MockHandler([
             new Response(200, [], 'Mocked Response'),
         ]);

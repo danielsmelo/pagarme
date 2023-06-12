@@ -1,6 +1,6 @@
 <?php
 
-namespace Contracts\Payments;
+namespace Danielsmelo\Pagarme\Contracts\Payments;
 
 final class Charge
 {
@@ -55,4 +55,60 @@ final class Charge
         'payment.pix.additional_information.*.name' => 'string',
         'payment.pix.additional_information.*.value' => 'string',
     ];
+
+    public function checkoutPayment(int $total, string $due_at, int $checkoutTime = 120, int $installmentsValue = 12, string $pixTime = "3600")
+    {
+        $installments = [];
+
+        for ($i = 1; $i <= $installmentsValue; $i++) {
+            $installments[] = [
+                "number" => $i,
+                "total" => $total
+            ];
+        }
+
+        return [
+            "payment_method" => "checkout",
+            "checkout" => [
+                "expires_in" => $checkoutTime, //tempo em minutos
+                "default_payment_method" => "credit_card",
+                "skip_checkout_success_page" => false,
+                "accepted_payment_methods" => [
+                    "credit_card",
+                    "boleto",
+                    "pix"
+                ],
+                "accepted_brands" => [
+                    "Visa",
+                    "Mastercard",
+                    "American Express",
+                    "Elo",
+                    "Hipercard"
+                ],
+                "accepted_multi_payment_methods" => [
+                    [
+                        "credit_card",
+                        "credit_card"
+                    ],
+                    [
+                        "credit_card",
+                        "boleto"
+                    ]
+                ],
+                "success_url" => "https =>//www.pagar.me",
+                "credit_card" => [
+                    "operation_type" => "auth_and_capture",
+                    "statement_descriptor" => "AVENGERS", //Máximo de 13 caracteres
+                    "installments" => $installments,
+                ],
+                "boleto" => [
+                    "instructions" => "Sr. Caixa, favor não aceitar pagamento após o vencimento",
+                    "due_at" => $due_at,
+                ],
+                "pix" => [
+                    "expires_in" => $pixTime, //Tempo em segundos
+                ]
+            ]
+        ];
+    }
 }
