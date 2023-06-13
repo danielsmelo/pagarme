@@ -1,6 +1,6 @@
 <?php
 
-namespace Contracts\Wallet;
+namespace Danielsmelo\Pagarme\Contracts\Wallet;
 
 final class Address
 {
@@ -59,4 +59,16 @@ final class Address
         'mobile_phone.area_code' => 'string',
         'mobile_phone.number' => 'string',
     ];
+
+    public function address(string $lineOne, string $lineTwo, string $zipCode, string $city, string $state, string $country)
+    {
+        return [
+            'line_1' => $lineOne,
+            'line_2' => $lineTwo,
+            'zip_code' => $zipCode,
+            'city' => $city,
+            'state' => $state,
+            'country' => $country,
+        ];
+    }
 }

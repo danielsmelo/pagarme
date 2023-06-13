@@ -1,6 +1,6 @@
 <?php
 
-namespace Contracts\Wallet;
+namespace Danielsmelo\Pagarme\Contracts\Wallet;
 
 final class CreditCard
 {

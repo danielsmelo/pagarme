@@ -1,6 +1,6 @@
 <?php
 
-namespace Contracts\Payments;
+namespace Danielsmelo\Pagarme\Contracts\Payments;
 
 final class Order
 {
@@ -138,4 +138,27 @@ final class Order
     const ORDER_MULTIPLE_BUYERS = [
         'amount' => 'numeric',
     ];
+
+    public function order(array $items, array $payments, $customer)
+    {
+        if (is_array($customer)) {
+            return [
+                "closed" => true,
+                "customer" => $customer,
+                "items" => $items,
+                "payments" => $payments,
+            ];
+        }
+
+        if (is_string($customer)) {
+            return [
+                "closed" => true,
+                "customer_id" => $customer,
+                "items" => $items,
+                "payments" => $payments,
+            ];
+        }
+
+        throw new \Exception('Customer must be an array or string');
+    }
 }

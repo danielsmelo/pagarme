@@ -30,4 +30,9 @@ class Pagarme
     {
         return $this->order;
     }
+
+    public function payload()
+    {
+        return $this->payload;
+    }
 }
