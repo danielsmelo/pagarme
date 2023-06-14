@@ -56,9 +56,13 @@ final class Charge
         'payment.pix.additional_information.*.value' => 'string',
     ];
 
-    public function checkoutPayment(int $total, string $due_at, int $checkoutTime = 120, int $installmentsValue = 12, string $pixTime = "3600")
+    public function checkoutPayment(int $total, string $customer, array $billingAddress, string $due_at = null, int $checkoutTime = 240, int $installmentsValue = 12, string $pixTime = 3600)
     {
         $installments = [];
+
+        if($due_at == null) {
+            $due_at = date('Y-m-d', strtotime('+4 day'));
+        }
 
         for ($i = 1; $i <= $installmentsValue; $i++) {
             $installments[] = [
@@ -68,10 +72,15 @@ final class Charge
         }
 
         return [
+            "amount" => $total,
+            "customer_id" => $customer,
             "payment_method" => "checkout",
             "checkout" => [
                 "expires_in" => $checkoutTime, //tempo em minutos
                 "default_payment_method" => "credit_card",
+                "customer_editable" => true,
+                "billing_address" => $billingAddress,
+                "billing_address_editable" => true,
                 "skip_checkout_success_page" => false,
                 "accepted_payment_methods" => [
                     "credit_card",
