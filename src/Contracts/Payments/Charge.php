@@ -56,7 +56,7 @@ final class Charge
         'payment.pix.additional_information.*.value' => 'string',
     ];
 
-    public function checkoutPayment(int $total, string $customer, array $billingAddress, string $due_at = null, int $checkoutTime = 240, int $installmentsValue = 12, string $pixTime = 3600)
+    public function checkoutPayment(int $total, string $customer, array $billingAddress, string $due_at = null, int $checkoutTime = 240, int $installmentsValue = 12, int $pixTime = 3600)
     {
         $installments = [];
 
