@@ -8,7 +8,8 @@ class Pagarme
         protected Endpoints\Customer $customer,
         protected Endpoints\Recipient $recipient,
         protected Endpoints\Charge $charge,
-        protected Endpoints\Order $order
+        protected Endpoints\Order $order,
+        protected Endpoints\Payload $payload
     ) {}
 
     public function customer()
