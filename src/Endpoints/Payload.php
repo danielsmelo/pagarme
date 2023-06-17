@@ -1,6 +1,12 @@
 <?php
 
-namespace Danielsmelo\Pagarme\Contracts;
+namespace Danielsmelo\Pagarme\Endpoints;
+
+use Danielsmelo\Pagarme\Contracts\Payments\Charge;
+use Danielsmelo\Pagarme\Contracts\Payments\Item;
+use Danielsmelo\Pagarme\Contracts\Payments\Order;
+use Danielsmelo\Pagarme\Contracts\Wallet\Address;
+use Danielsmelo\Pagarme\Contracts\Wallet\Customer;
 
 class Payload
 {
@@ -11,11 +17,11 @@ class Payload
     private $customer;
 
     public function __construct(
-        Payments\Order $order,
-        Payments\Charge $charge,
-        Payments\Item $item,
-        Wallet\Address $address,
-        Wallet\Customer $customer
+        Order $order,
+        Charge $charge,
+        Item $item,
+        Address $address,
+        Customer $customer
     ) {
         $this->order = $order;
         $this->charge = $charge;
