@@ -56,7 +56,7 @@ final class Charge
         'payment.pix.additional_information.*.value' => 'string',
     ];
 
-    public function checkoutPayment(int $total, string $customer, array $billingAddress, string $due_at = null, int $checkoutTime = 240, int $installmentsValue = 12, int $pixTime = 3600)
+    public function checkoutPayment(int $total, string $customer, array $billingAddress, string $due_at = null, int $checkoutTime = 240, int $installmentsValue = 12, int $pixTime = 3600, string $successUrl = 'https://pagar.me')
     {
         $installments = [];
 
@@ -104,7 +104,7 @@ final class Charge
                         "boleto"
                     ]
                 ],
-                "success_url" => "https =>//www.pagar.me",
+                "success_url" => $successUrl,
                 "credit_card" => [
                     "operation_type" => "auth_and_capture",
                     "statement_descriptor" => "AVENGERS", //Máximo de 13 caracteres
