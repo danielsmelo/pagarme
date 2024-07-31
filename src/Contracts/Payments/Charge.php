@@ -121,4 +121,18 @@ final class Charge
             ]
         ];
     }
+
+    public function creditCardPayment(string $customer, string $cardId)
+    {
+        return [
+            "customer_id" => $customer,
+            "payment_method" => "credit_card",
+            "credit_card" => [
+                "recurrence" => false,
+                "installments" => 2,
+                "statement_descriptor" => "NeST",
+                "card_id" => $cardId
+            ]
+        ];
+    }
 }
