@@ -7,6 +7,7 @@ use Danielsmelo\Pagarme\Contracts\Payments\Item;
 use Danielsmelo\Pagarme\Contracts\Payments\Order;
 use Danielsmelo\Pagarme\Contracts\Wallet\Address;
 use Danielsmelo\Pagarme\Contracts\Wallet\Customer;
+use Danielsmelo\Pagarme\Contracts\Wallet\CreditCard;
 
 class Payload
 {
@@ -15,19 +16,22 @@ class Payload
     private $item;
     private $address;
     private $customer;
+    private $card;
 
     public function __construct(
         Order $order,
         Charge $charge,
         Item $item,
         Address $address,
-        Customer $customer
+        Customer $customer,
+        CreditCard $card
     ) {
         $this->order = $order;
         $this->charge = $charge;
         $this->item = $item;
         $this->address = $address;
         $this->customer = $customer;
+        $this->card = $card;
     }
 
     public function order(...$args)
@@ -48,6 +52,11 @@ class Payload
     public function customer(...$args)
     {
         return $this->customer->customer(...$args);
+    }
+
+    public function card(...$args)
+    {
+        return $this->card->card(...$args);
     }
 
     public function address(...$args)

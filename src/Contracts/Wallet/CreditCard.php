@@ -38,4 +38,22 @@ final class CreditCard
         'card.label' => 'string',
         'card.billing_address' => 'array',
     ];
+
+    public function card(
+        string $number, 
+        string $holder, 
+        string $document, 
+        int $expMonth, 
+        string $expYear, 
+        string $cvv,
+    ){
+        return [
+            'number' => $number,
+            'holder_name' => $holder,
+            'holder_document' => $document,
+            'exp_month' => $expMonth,
+            'exp_year' => $expYear,
+            'cvv' => $cvv,
+        ];
+    }
 }
