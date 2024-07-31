@@ -49,6 +49,11 @@ class Payload
         return $this->charge->creditCardPayment(...$args);
     }
 
+    public function unsavedCreditCardPayment(...$args)
+    {
+        return $this->charge->unsavedCreditCardPayment(...$args);
+    }
+
     public function item(...$args)
     {
         return $this->item->item(...$args);
