@@ -56,8 +56,17 @@ final class Charge
         'payment.pix.additional_information.*.value' => 'string',
     ];
 
-    public function checkoutPayment(int $total, string $customer, array $billingAddress, string $due_at = null, int $checkoutTime = 240, int $installmentsValue = 12, int $pixTime = 3600, string $successUrl = 'https://pagar.me')
-    {
+    public function checkoutPayment(
+        int $total, 
+        string $customer, 
+        array $billingAddress, 
+        string $due_at = null, 
+        int $checkoutTime = 240, 
+        int $installmentsValue = 12, 
+        int $pixTime = 3600, 
+        string $successUrl = 'https://pagar.me',
+        string $cardId = null,
+    ){
         $installments = [];
 
         if($due_at == null) {
@@ -84,7 +93,6 @@ final class Charge
                 "skip_checkout_success_page" => false,
                 "accepted_payment_methods" => [
                     "credit_card",
-                    "boleto",
                     "pix"
                 ],
                 "accepted_brands" => [
@@ -99,20 +107,13 @@ final class Charge
                         "credit_card",
                         "credit_card"
                     ],
-                    [
-                        "credit_card",
-                        "boleto"
-                    ]
                 ],
                 "success_url" => $successUrl,
                 "credit_card" => [
                     "operation_type" => "auth_and_capture",
                     "statement_descriptor" => "AVENGERS", //Máximo de 13 caracteres
                     "installments" => $installments,
-                ],
-                "boleto" => [
-                    "instructions" => "Sr. Caixa, favor não aceitar pagamento após o vencimento",
-                    "due_at" => $due_at,
+                    "card_id" => $cardId,
                 ],
                 "pix" => [
                     "expires_in" => $pixTime, //Tempo em segundos
