@@ -135,4 +135,30 @@ final class Charge
             ]
         ];
     }
+
+    public function unsavedCreditCardPayment(
+        string $customer,
+        string $number,
+        string $holderName,
+        int $expMonth,
+        int $expYear,
+        string $cvv,
+    ){
+        return [
+            "customer_id" => $customer,
+            "payment_method" => "credit_card",
+            "credit_card" => [
+                "recurrence" => false,
+                "installments" => 2,
+                "statement_descriptor" => "NeST",
+                "card" => [
+                    "number" => $number,
+                    "holder_name" => $holderName,
+                    "exp_month" => $expMonth,
+                    "exp_year" => $expYear,
+                    "cvv" => $cvv,
+                ]
+            ]
+        ];
+    }
 }
